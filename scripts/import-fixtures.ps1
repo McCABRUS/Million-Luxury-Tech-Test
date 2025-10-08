@@ -20,8 +20,10 @@ if (-not (Test-Path $FixturesDir)) {
 }
 
 $collections = @{
-    "owners.json"     = "owners"
-    "properties.json" = "properties"
+    "realestate.owners"     = "owners"
+    "realestate.properties" = "properties"
+    "realestate.propertyImages" = "propertyImages"
+    "realestate.propertyTraces" = "propertyTraces"
 }
 
 foreach ($file in $collections.Keys) {
