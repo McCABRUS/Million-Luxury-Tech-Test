@@ -1,0 +1,55 @@
+[{
+  "_id": {
+    "$oid": "68e5a504037d5ab05225fc9e"
+  },
+  "IdPropertyTRace": "pt1",
+  "DateSale": "07/10/2025",
+  "Name": "Palm Island House",
+  "Value": 48000000,
+  "Tax": 316105,
+  "IdProperty": "A11823145"
+},
+{
+  "_id": {
+    "$oid": "68e5a557037d5ab05225fca0"
+  },
+  "IdPropertyTRace": "pt2",
+  "DateSale": "08/29/2025",
+  "Name": "La Gorce House",
+  "Value": 169000000,
+  "Tax": 257113,
+  "IdProperty": "A11859126"
+},
+{
+  "_id": {
+    "$oid": "68e5a5a1037d5ab05225fca2"
+  },
+  "IdPropertyTRace": "pt3",
+  "DateSale": "01/24/2025",
+  "Name": "Biscayne Beach House",
+  "Value": 150000000,
+  "Tax": 317310,
+  "IdProperty": "A11729636"
+},
+{
+  "_id": {
+    "$oid": "68e5a5d9037d5ab05225fca4"
+  },
+  "IdPropertyTRace": "pt4",
+  "DateSale": "07/10/2025",
+  "Name": "Palm and Hibiscus Islands House",
+  "Value": 99000000,
+  "Tax": 345270,
+  "IdProperty": "A11833354"
+},
+{
+  "_id": {
+    "$oid": "68e5a61b037d5ab05225fca6"
+  },
+  "IdPropertyTRace": "pt5",
+  "DateSale": "10/07/2025",
+  "Name": "Fisher Island House",
+  "Value": 85000000,
+  "Tax": 646992,
+  "IdProperty": "A11745701"
+}]
