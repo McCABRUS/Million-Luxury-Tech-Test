@@ -1,0 +1,126 @@
+# Visual Studio
+.vs/
+.vscode/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build outputs
+/bin/
+/obj/
+/out/
+**/bin/
+**/obj/
+
+# Rider
+.idea/
+*.sln.iml
+
+# NuGet
+packages/
+*.nupkg
+project.lock.json
+project.fragment.lock.json
+.nuget/
+
+# Visual Studio Code
+.history/
+*.code-workspace
+
+# DotNet temporary files
+*.dotCover
+*.ncrunch*
+TestResults/
+coverage/
+coverage*.json
+coverage*.xml
+*.opencover.xml
+
+# ASP.NET / Web
+wwwroot/lib/
+
+# User secrets and environment
+appsettings.Development.json
+appsettings.Local.json
+*.env
+.env.local
+*.secret.json
+secrets.json
+
+# Database / Local data
+*.mdf
+*.ldf
+*.db
+*.sqlite
+data/
+backups/
+backups/**
+
+# MongoDB local DB files (if accidentally present)
+mongod.lock
+journal/
+local.*
+diagnostic.data/
+
+# Logs
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Node / Frontend
+node_modules/
+dist/
+build/
+
+# JetBrains Rider, IntelliJ
+.idea/
+*.iml
+
+# OS generated
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store
+
+# Certificates and keys
+*.pfx
+*.key
+*.cer
+*.pem
+
+# Docker
+**/docker-compose.override.yml
+**/.docker/
+**/docker/data/
+.docker/
+docker-compose*.yml
+
+# Editors
+*.swp
+*~.nib
+*.sublime-workspace
+*.sublime-project
+
+# Generated files
+*.generated.cs
+*.g.cs
+*.g.i.cs
+
+# Local launch settings
+Properties/launchSettings.json
+
+# Optional: Rider caches, user prefs
+.idea/
+*.sublime-*
+*.suo
+
+# Optional: Visual Studio publish folder
+publish/
+
+# Optional: VS telemetry
+vssver.scm
+
+# End of file
