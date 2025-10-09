@@ -17,5 +17,7 @@ namespace RealEstate.Infrastructure.Repositories
     {
         Task<List<Property>> GetAsync(FilterParams filter, int page = 1, int pageSize = 20, CancellationToken ct = default);
         Task<Property?> GetByIdAsync(string id, CancellationToken ct = default);
+        Task<List<PropertyImage>> GetImagesByPropertyIdAsync(string idProperty, CancellationToken ct = default);
+        Task<List<PropertyTrace>> GetTracesByPropertyIdAsync(string idProperty, CancellationToken ct = default);
     }
 }

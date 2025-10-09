@@ -14,21 +14,32 @@ namespace RealEstate.Application.Services
         public async Task<List<PropertyListDto>> GetAsync(FilterParams filter, int page = 1, int pageSize = 20)
         {
             var props = await _repo.GetAsync(filter, page, pageSize);
-            return props.Select(p => new PropertyListDto
+            var result = new List<PropertyListDto>();
+
+            foreach (var p in props)
             {
-                IdProperty = p.IdProperty,
-                Name = p.Name,
-                Address = p.Address,
-                Price = p.Price,
-                Image = p.Images?.FirstOrDefault()?.File,
-                IdOwner = p.IdOwner
-            }).ToList();
+                var images = await _repo.GetImagesByPropertyIdAsync(p.IdProperty);
+                result.Add(new PropertyListDto
+                {
+                    IdProperty = p.IdProperty,
+                    Name = p.Name,
+                    Address = p.Address,
+                    Price = p.Price,
+                    Image = images.FirstOrDefault()?.File,
+                    IdOwner = p.IdOwner
+                });
+            }
+            return result;
         }
 
         public async Task<PropertyDetailDto?> GetByIdAsync(string id)
         {
             var p = await _repo.GetByIdAsync(id);
             if (p == null) return null;
+
+            var images = await _repo.GetImagesByPropertyIdAsync(p.IdProperty);
+            var traces = await _repo.GetTracesByPropertyIdAsync(p.IdProperty);
+
             return new PropertyDetailDto
             {
                 IdProperty = p.IdProperty,
@@ -38,8 +49,16 @@ namespace RealEstate.Application.Services
                 CodeInternal = p.CodeInternal,
                 Year = p.Year,
                 IdOwner = p.IdOwner,
-                Images = p.Images?.Where(i => i.Enabled).Select(i => i.File).ToList(),
-                Traces = p.Traces?.Select(t => new { t.DateSale, t.Name, t.Value, t.Tax }).Cast<object>().ToList()
+                Images = images?.Where(i => i.Enabled).Select(i => i.File).ToList() ?? new List<string>(),
+                Traces = traces?.Select(t => new PropertyTraceDto
+                {
+                    DateSale = t.DateSale,
+                    Name = t.Name,
+                    Value = t.Value,
+                    Tax = t.Tax,
+                    IdPropertyTrace = t.IdPropertyTrace,
+                    IdProperty = t.IdProperty
+                }).Cast<object>().ToList() ?? new List<object>()
             };
         }
     }

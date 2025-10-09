@@ -7,12 +7,11 @@ namespace RealEstate.Domain.Entities
     [BsonIgnoreExtraElements]
     public class PropertyTrace
     {
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
+        [BsonElement("IdPropertyTrace")]
         public string IdPropertyTrace { get; set; } = null!;
 
         [BsonElement("DateSale")]
-        public DateTime DateSale { get; set; }
+        public string DateSale { get; set; } = null!;
 
         [BsonElement("Name")]
         public string Name { get; set; } = null!;

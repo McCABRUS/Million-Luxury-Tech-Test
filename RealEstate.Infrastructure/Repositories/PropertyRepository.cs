@@ -37,5 +37,20 @@ namespace RealEstate.Infrastructure.Repositories
         {
             return await _context.Properties.Find(p => p.IdProperty == id).FirstOrDefaultAsync(ct);
         }
+
+        public async Task<List<PropertyImage>> GetImagesByPropertyIdAsync(string idProperty, CancellationToken ct = default)
+        {
+            return await _context.PropertyImages
+                                 .Find(pi => pi.IdProperty == idProperty && pi.Enabled)
+                                 .ToListAsync(ct);
+        }
+
+        public async Task<List<PropertyTrace>> GetTracesByPropertyIdAsync(string idProperty, CancellationToken ct = default)
+        {
+            return await _context.PropertyTraces
+                                 .Find(pt => pt.IdProperty == idProperty)
+                                 .ToListAsync(ct);
+        }
+
     }
 }

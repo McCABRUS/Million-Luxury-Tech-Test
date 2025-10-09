@@ -7,8 +7,7 @@ namespace RealEstate.Domain.Entities
     [BsonIgnoreExtraElements]
     public class Property
     {
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
+        [BsonElement("IdProperty")]
         public string IdProperty { get; set; } = null!;
 
         [BsonElement("Name")]

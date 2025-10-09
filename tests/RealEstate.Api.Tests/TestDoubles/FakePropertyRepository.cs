@@ -28,5 +28,21 @@ namespace RealEstate.Api.Tests.TestDoubles
             var p = _store.FirstOrDefault(x => x.IdProperty == id);
             return Task.FromResult(p);
         }
+
+        public Task<List<PropertyImage>> GetImagesByPropertyIdAsync(string idProperty, CancellationToken ct = default)
+        {
+            var prop = _store.FirstOrDefault(x => x.IdProperty == idProperty);
+            var images = prop?.Images?.Where(i => i.Enabled).ToList() ?? new List<PropertyImage>();
+            return Task.FromResult(images);
+        }
+
+        public Task<List<PropertyTrace>> GetTracesByPropertyIdAsync(string idProperty, CancellationToken ct = default)
+        {
+            var prop = _store.FirstOrDefault(x => x.IdProperty == idProperty);
+            var traces = prop?.Traces?.ToList() ?? new List<PropertyTrace>();
+            return Task.FromResult(traces);
+        }
+
+
     }
 }

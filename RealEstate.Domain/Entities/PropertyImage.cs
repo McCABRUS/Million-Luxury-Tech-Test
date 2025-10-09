@@ -6,8 +6,7 @@ namespace RealEstate.Domain.Entities
     [BsonIgnoreExtraElements]
     public class PropertyImage
     {
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
+        [BsonElement("IdPropertyImage")]
         public string IdPropertyImage { get; set; } = null!;
 
         [BsonElement("IdProperty")]

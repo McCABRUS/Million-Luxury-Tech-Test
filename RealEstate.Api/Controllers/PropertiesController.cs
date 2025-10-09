@@ -19,12 +19,13 @@ namespace RealEstate.Api.Controllers
             return Ok(result);
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(string id)
+        [HttpGet("{propertyId}")]
+        public async Task<IActionResult> GetById(string propertyId)
         {
-            var dto = await _svc.GetByIdAsync(id);
+            var dto = await _svc.GetByIdAsync(propertyId);
             if (dto == null) return NotFound();
             return Ok(dto);
         }
+
     }
 }

@@ -7,8 +7,7 @@ namespace RealEstate.Domain.Entities
     [BsonIgnoreExtraElements]
     public class Owner
     {
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
+        [BsonElement("IdOwner")]
         public string IdOwner { get; set; } = null!;
 
         [BsonElement("Name")]
