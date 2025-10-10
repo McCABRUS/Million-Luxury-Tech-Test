@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { fetchProperties, PropertyListParams, PropertyListDto } from '../api/properties';
+import { fetchProperties } from '../api/properties';
+import type { PropertyListParams, PropertyListDto } from '../api/properties';
 
 export function useProperties(initialParams: PropertyListParams = {}) {
   const [params, setParams] = useState<PropertyListParams>(initialParams);
