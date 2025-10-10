@@ -27,10 +27,10 @@ namespace RealEstate.Infrastructure.Repositories
             var finalFilter = filters.Any() ? builder.And(filters) : builder.Empty;
 
             return await _context.Properties
-                                 .Find(finalFilter)
-                                 .Skip((page - 1) * pageSize)
-                                 .Limit(pageSize)
-                                 .ToListAsync(ct);
+                .Find(finalFilter)
+                .Skip((page - 1) * pageSize)
+                .Limit(pageSize)
+                .ToListAsync(ct);
         }
 
         public async Task<Property?> GetByIdAsync(string id, CancellationToken ct = default)
@@ -41,15 +41,15 @@ namespace RealEstate.Infrastructure.Repositories
         public async Task<List<PropertyImage>> GetImagesByPropertyIdAsync(string idProperty, CancellationToken ct = default)
         {
             return await _context.PropertyImages
-                                 .Find(pi => pi.IdProperty == idProperty && pi.Enabled)
-                                 .ToListAsync(ct);
+                .Find(pi => pi.IdProperty == idProperty && pi.Enabled)
+                .ToListAsync(ct);
         }
 
         public async Task<List<PropertyTrace>> GetTracesByPropertyIdAsync(string idProperty, CancellationToken ct = default)
         {
             return await _context.PropertyTraces
-                                 .Find(pt => pt.IdProperty == idProperty)
-                                 .ToListAsync(ct);
+                .Find(pt => pt.IdProperty == idProperty)
+                .ToListAsync(ct);
         }
 
     }

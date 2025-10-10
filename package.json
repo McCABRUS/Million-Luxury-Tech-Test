@@ -1,0 +1,27 @@
+{
+  "name": "million-luxury-tech-test",
+  "version": "1.0.0",
+  "description": "1. (Optional) Launch Mongo in Docker:\r docker-compose -f docker/docker-compose.yml up -d",
+  "main": "syncImagesToMongo.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/McCABRUS/Million-Luxury-Tech-Test.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/McCABRUS/Million-Luxury-Tech-Test/issues"
+  },
+  "homepage": "https://github.com/McCABRUS/Million-Luxury-Tech-Test#readme",
+  "dependencies": {
+    "mongodb": "^6.20.0"
+  },
+  "devDependencies": {}
+}

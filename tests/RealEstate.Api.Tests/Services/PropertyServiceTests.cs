@@ -1,13 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using FluentAssertions;
+using NUnit.Framework;
+using RealEstate.Api.Tests.TestDoubles;
+using RealEstate.Application.Dtos;
+using RealEstate.Application.Services;
+using RealEstate.Domain.Entities;
+using RealEstate.Infrastructure.Repositories;
+using RealEstate.Infrastructure.Settings;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using FluentAssertions;
-using NUnit.Framework;
-using RealEstate.Application.Services;
-using RealEstate.Application.Dtos;
-using RealEstate.Infrastructure.Repositories;
-using RealEstate.Domain.Entities;
-using RealEstate.Api.Tests.TestDoubles;
 
 namespace RealEstate.Api.Tests.Services
 {
@@ -33,7 +34,14 @@ namespace RealEstate.Api.Tests.Services
             };
 
             _fakeRepo = new FakePropertyRepository(initial);
-            _service = new PropertyService(_fakeRepo); 
+            var imagesOptions = new ImagesOptions
+            {
+                ImagesRootPath = Path.Combine(Directory.GetCurrentDirectory(), "assets", "img", "propertyImgs"),
+                ImagesRequestPath = "/assets/img/propertyImgs",
+                PublicBaseUrl = null
+            };
+
+            _service = new PropertyService(_fakeRepo, imagesOptions);
         }
 
         [Test]

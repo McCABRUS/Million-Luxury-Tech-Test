@@ -12,6 +12,7 @@ namespace RealEstate.Application.Dtos
         public int? Year { get; set; }
         public string? IdOwner { get; set; }
         public List<string>? Images { get; set; }
-        public List<object>? Traces { get; set; }
+        public List<PropertyTraceDto>? Traces { get; set; }
+
     }
 }
