@@ -8,7 +8,7 @@ export function OwnerProfile({ owners = [] }: { owners?: OwnerDto[] }) {
       <h3 className="op-title">Owners</h3>
       <ul className="op-list">
         {owners.map(o => (
-          <li key={o.idOwner} className="op-item">
+          <li key={o.idOwner} className="op-item" data-testid={`owner-item-${o.idOwner}`}>
             <img className="op-photo" src={o.photo ?? '/owner-placeholder.jpg'} alt={o.name ?? 'owner'} loading="lazy"
               onError={(e) => { (e.currentTarget as HTMLImageElement).src = '/owner-placeholder.jpg'; }} />
             <div className="op-info">
