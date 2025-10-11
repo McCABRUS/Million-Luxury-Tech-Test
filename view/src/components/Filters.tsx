@@ -11,11 +11,13 @@ export default function Filters({ name = '', address = '', priceFrom, priceTo, o
     <form onSubmit={e => e.preventDefault()} className="filters">
       <input
         placeholder="Name"
+        type="text"
         value={name}
         onChange={e => onChange({ name: e.target.value })}
       />
       <input
         placeholder="Address"
+        type="text"
         value={address}
         onChange={e => onChange({ address: e.target.value })}
       />

@@ -67,6 +67,7 @@ body{
   min-width:160px;
   outline:none;
 }
+
 .filters input:focus{box-shadow:0 0 0 4px rgba(15,98,254,0.06); border-color:var(--accent)}
 
 /* =========================
