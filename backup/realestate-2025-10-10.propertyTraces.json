@@ -52,4 +52,15 @@
   "Tax": 317310,
   "IdProperty": "A11729636",
   "IdPropertyTrace": "pt3"
+},
+{
+  "_id": {
+    "$oid": "68e9ca32f0c57a3c2ef3cca2"
+  },
+  "DateSale": "10/10/2025",
+  "Name": "Palm Island House",
+  "Value": 35000000,
+  "Tax": 154879,
+  "IdProperty": "A11823145",
+  "IdPropertyTrace": "pt6"
 }]

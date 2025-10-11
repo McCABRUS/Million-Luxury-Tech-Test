@@ -1,70 +1,73 @@
 import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { fetchPropertyById } from '../api/properties';
+import type { PropertyDetailDto } from '../api/properties';
+import { PropertyGallery } from '../components/PropertyGallery';
+import { PropertyProfile } from '../components/PropertyProfile';
+import { OwnerProfile } from '../components/OwnerProfile';
+import '../styles/PropertyDetailPage.css';
 
-export default function PropertyDetailPage() {
-  const { id } = useParams<{ id: string }>();
+export default function PropertyDetailPage({ id: propId }: { id?: string }) {
+  const params = useParams<{ id?: string }>();
   const navigate = useNavigate();
-  const [dto, setDto] = useState<any | null>(null);
-  const [loading, setLoading] = useState(true);
+  const id = propId ?? params.id;
+
+  const [property, setProperty] = useState<PropertyDetailDto | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!id) return;
+    let mounted = true;
     setLoading(true);
+    setError(null);
+
     fetchPropertyById(id)
-      .then(d => setDto(d))
-      .catch(() => setDto(null))
-      .finally(() => setLoading(false));
+      .then(r => { if (mounted) setProperty(r); })
+      .catch(e => { if (mounted) setError(String(e)); })
+      .finally(() => { if (mounted) setLoading(false); });
+
+    return () => { mounted = false; };
   }, [id]);
 
-  if (loading) return <div className="app-container"><p>Loading detail...</p></div>;
-  if (!dto) return <div className="app-container"><p className="empty">Property not found</p></div>;
+  if (!id) return <div className="pd-page--center">Property id is missing</div>;
+  if (loading) return <div className="pd-page--center">Loading property...</div>;
+  if (error) return <div className="pd-page--center error">Error: {error}</div>;
+  if (!property) return <div className="pd-page--center">Not found</div>;
 
   return (
-    <div className="app-container">
-      <button className="back-btn" onClick={() => navigate(-1)}>← Back</button>
+    <main className="pd-page">
+      <div className="pd-header">
+      <button
+        type="button"
+        className="pd-back-btn"
+        onClick={() => navigate(-1)}
+        aria-label="Go back"
+      >
+        ← Back
+      </button>
 
-      <div className="profile">
-        <div className="left">
-          <div className="profile-card">
-            <h2>{dto.name}</h2>
-            <div className="sub">{dto.address}</div>
-            <div style={{ fontWeight: 700, fontSize: '1.1rem' }}>${dto.price?.toLocaleString()}</div>
-
-            <div className="gallery" style={{ marginTop: 12 }}>
-              {(dto.images ?? []).length === 0
-                ? <img src="/placeholder.png" alt="placeholder" />
-                : (dto.images ?? []).map((s:string, i:number) => <img key={i} src={s} alt={`${dto.name} ${i+1}`} />)}
-            </div>
-          </div>
-        </div>
-
-        <div className="right">
-          <div className="profile-card">
-            <h3>Property profile</h3>
-            <p><strong>Code:</strong> {dto.codeInternal ?? dto.CodeInternal}</p>
-            <p><strong>Year:</strong> {dto.year ?? dto.Year}</p>
-            <p><strong>Owner:</strong> {dto.idOwner ?? dto.IdOwner}</p>
-
-            <h4 style={{ marginTop:12 }}>Traces</h4>
-            <table className="table">
-              <thead>
-                <tr><th>Date</th><th>Name</th><th>Value</th><th>Tax</th></tr>
-              </thead>
-              <tbody>
-                {(dto.traces ?? []).map((t:any,i:number) =>
-                  <tr key={i}>
-                    <td>{t.dateSale ?? t.DateSale ?? '-'}</td>
-                    <td>{t.name ?? t.Name}</td>
-                    <td>{t.value ?? t.Value}</td>
-                    <td>{t.tax ?? t.Tax}</td>
-                  </tr>
-                )}
-              </tbody>
-            </table>
-          </div>
+      <div className="pd-title-block">
+        <h1 className="pd-title-lg">{property.name ?? 'Property'}</h1>
+        <div className="pd-price-lg">
+          {property.price == null
+            ? 'Price N/A'
+            : new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(property.price)}
         </div>
       </div>
     </div>
+
+
+      <div className="pd-gallery-full">
+        <PropertyGallery images={property.images ?? []} />
+      </div>
+
+      <div className="pd-content">
+        <section className="pd-right">
+          <PropertyProfile property={property} />
+          <OwnerProfile owners={property.owners ?? []} />
+        </section>
+      </div>
+    </main>
   );
 }

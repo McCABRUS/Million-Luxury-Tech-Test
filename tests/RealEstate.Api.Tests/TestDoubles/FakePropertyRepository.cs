@@ -10,10 +10,14 @@ namespace RealEstate.Api.Tests.TestDoubles
     public class FakePropertyRepository : IPropertyRepository
     {
         private readonly List<Property> _store;
+        private readonly List<Owner> _owners;
 
-        public FakePropertyRepository(IEnumerable<Property>? initial = null)
+
+        public FakePropertyRepository(IEnumerable<Property>? initial = null, List<Owner>? initialOwners = null)
         {
             _store = initial?.ToList() ?? new List<Property>();
+            _owners = initialOwners ?? new List<Owner>();
+
         }
 
         public Task<List<Property>> GetAsync(FilterParams filter, int page = 1, int pageSize = 20, CancellationToken ct = default)
@@ -42,6 +46,13 @@ namespace RealEstate.Api.Tests.TestDoubles
             var traces = prop?.Traces?.ToList() ?? new List<PropertyTrace>();
             return Task.FromResult(traces);
         }
+
+        public Task<List<Owner>> GetOwnersByIdsAsync(string idOwner, CancellationToken ct = default)
+        {
+            var result = _owners.Where(o => o.IdOwner == idOwner).ToList();
+            return Task.FromResult(result);
+        }
+
 
 
     }

@@ -1,4 +1,5 @@
 ﻿using RealEstate.Application.Dtos;
+using RealEstate.Domain.Entities;
 using RealEstate.Infrastructure.Repositories;
 using RealEstate.Infrastructure.Settings;
 using System.Collections.Generic;
@@ -18,23 +19,32 @@ namespace RealEstate.Application.Services
             _imagesOptions = imagesOptions;
         }
 
-        private string BuildImageUrl(string idProperty, string fileName)
+        private string BuildPropertyImageUrl(string subfolder, string relativePathOrFile)
         {
-            var requestPath = _imagesOptions.ImagesRequestPath?.TrimEnd('/') ?? "/assets/img/propertyImgs";
-            var relativePath = $"{requestPath}/{Uri.EscapeDataString(idProperty)}/{Uri.EscapeDataString(fileName)}";
             if (!string.IsNullOrWhiteSpace(_imagesOptions.PublicBaseUrl))
             {
-                var baseUrl = _imagesOptions.PublicBaseUrl!.TrimEnd('/');
-                return $"{baseUrl}{relativePath}";
+                return $"{_imagesOptions.PublicBaseUrl.TrimEnd('/')}{_imagesOptions.ImagesRequestPath}/{subfolder}/{relativePathOrFile.TrimStart('/')}";
             }
-            return relativePath;
+            return $"{_imagesOptions.ImagesRequestPath}/{subfolder}/{relativePathOrFile.TrimStart('/')}";
         }
+
+        private string BuildOwnerImageUrl(string idOwner)
+        {
+            if (!string.IsNullOrWhiteSpace(_imagesOptions.PublicBaseUrl))
+            {
+                return $"{_imagesOptions.PublicBaseUrl.TrimEnd('/')}{_imagesOptions.ImagesRequestPath}/ownersImgs/{Uri.EscapeDataString(idOwner)}.jpg";
+            }
+            return $"{_imagesOptions.ImagesRequestPath}/ownersImgs/{Uri.EscapeDataString(idOwner)}.jpg";
+        }
+
 
         public async Task<PropertyDetailDto?> GetByIdAsync(string id)
         {
             var p = await _repo.GetByIdAsync(id);
             if (p == null) return null;
 
+            var ownerIds = new List<string>();
+            if (!string.IsNullOrWhiteSpace(p.IdOwner)) ownerIds.Add(p.IdOwner);
             var imagesMeta = await _repo.GetImagesByPropertyIdAsync(p.IdProperty);
             var tracesEntities = await _repo.GetTracesByPropertyIdAsync(p.IdProperty);
             var tracesDto = tracesEntities.Select(t => new PropertyTraceDto
@@ -47,10 +57,24 @@ namespace RealEstate.Application.Services
                 IdProperty = t.IdProperty
             }).ToList();
 
+            var ownersDto = new List<OwnerDto>();
+            if (ownerIds.Any())
+            {
+                var ownersEntities = await _repo.GetOwnersByIdsAsync(p.IdOwner);
+                ownersDto = ownersEntities.Select(o => new OwnerDto
+                {
+                    IdOwner = o.IdOwner,
+                    Name = o.Name,
+                    Address = o.Address,
+                    Birthday = o.Birthday,
+                    Photo = BuildOwnerImageUrl(o.IdOwner)
+                }).ToList();
 
-            var images = imagesMeta?
-                .Where(i => i.Enabled)
-                .Select(i => BuildImageUrl(p.IdProperty, i.File))
+            }
+
+            var images = imagesMeta
+                .Where(img => img.Enabled)
+                .Select(img => BuildPropertyImageUrl("propertyImgs", $"{p.IdProperty}/{img.File}"))
                 .ToList() ?? new List<string>();
 
             return new PropertyDetailDto
@@ -63,7 +87,8 @@ namespace RealEstate.Application.Services
                 Year = p.Year,
                 IdOwner = p.IdOwner,
                 Images = images,
-                Traces = tracesDto
+                Traces = tracesDto,
+                Owners = ownersDto
             };
         }
 
@@ -75,7 +100,7 @@ namespace RealEstate.Application.Services
             {
                 var imagesMeta = await _repo.GetImagesByPropertyIdAsync(p.IdProperty);
                 var first = imagesMeta?.Where(i => i.Enabled).FirstOrDefault();
-                var imageUrl = first == null ? null : BuildImageUrl(p.IdProperty, first.File);
+                var imageUrl = first == null ? null : BuildPropertyImageUrl("propertyImgs", $"{p.IdProperty}/{first.File}");
                 list.Add(new PropertyListDto
                 {
                     IdProperty = p.IdProperty,

@@ -18,17 +18,37 @@ export interface PropertyListDto {
   idOwner?: string | null;
 }
 
-export interface PropertyDetailDto {
+export interface PropertyTraceDto {
+  idPropertyTrace: string;
+  dateSale?: string;
+  name?: string;
+  value?: string;
+  tax?: number;
+  idProperty?: string;
+}; 
+
+export type PropertyDetailDto = {
   idProperty: string;
-  name: string;
-  address?: string | null;
-  price: number;
-  codeInternal?: string | null;
-  year?: number | null;
-  idOwner?: string | null;
-  images?: string[] | null;
-  traces?: any[] | null;
-}
+  name?: string;
+  address?: string;
+  price?: number;
+  images: string[]; // urls absolutas o relativas
+  traces: PropertyTraceDto[];
+  owners: OwnerDto[];
+};
+
+export type OwnerDto = {
+  idOwner: string;
+  name?: string;
+  address?: string;
+  photo?: string; // url
+  birthday?: string;
+};
+
+export type PropertyGalleryProps = { images: string[]; initialIndex?: number };
+export type PropertyProfileProps = { property: PropertyDetailDto };
+export type OwnerProfileProps = { owners: OwnerDto[] };
+
 
 export const fetchProperties = (params: PropertyListParams) =>
   http.get<PropertyListDto[]>('', { params }).then(r => r.data);

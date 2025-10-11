@@ -33,7 +33,17 @@ namespace RealEstate.Api.Tests.Services
                 }
             };
 
-            _fakeRepo = new FakePropertyRepository(initial);
+            var ownerExample = new Owner
+            {
+                IdOwner = "owner0",
+                Name = "Miguel Prado",
+                Address = "32 PALM AVE, Miami Beach, FL 33139",
+                Photo = "owner0.jpg",
+                Birthday = "04/13/1982"
+            };
+
+
+            _fakeRepo = new FakePropertyRepository(initial, new List<Owner> { ownerExample });
             var imagesOptions = new ImagesOptions
             {
                 ImagesRootPath = Path.Combine(Directory.GetCurrentDirectory(), "assets", "img", "propertyImgs"),
@@ -62,5 +72,17 @@ namespace RealEstate.Api.Tests.Services
             var res = await _service.GetByIdAsync("nope");
             res.Should().BeNull();
         }
+
+        [Test]
+        public async Task GetByIdAsync_ReturnsOwners()
+        {
+            var res = await _service.GetByIdAsync("A11745701");
+            res.Should().NotBeNull();
+            res!.Owners.Should().NotBeNullOrEmpty();
+            res.Owners[0].IdOwner.Should().Be("owner1");
+            res.Owners[0].Name.Should().Be("Juan Perez");
+            res.Owners[0].Photo.Should().Be("owner1.jpg");
+        }
+
     }
 }

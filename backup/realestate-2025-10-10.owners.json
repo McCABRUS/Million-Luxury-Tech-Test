@@ -1,22 +1,22 @@
 [{
   "_id": {
-    "$oid": "68e4830e233788ff96f66561"
-  },
-  "IdOwner": "owner1",
-  "Name": "Juan Perez",
-  "Address": "30 PALM AVE, Miami Beach, FL 33139",
-  "Photo": "assets/img/owner1.jpg",
-  "Birthday": "02/23/1980"
-},
-{
-  "_id": {
     "$oid": "68e57fbb037d5ab05225fc77"
   },
   "IdOwner": "owner2",
   "Name": "John Smith",
   "Address": "5940 BAY RD, Miami Beach, FL 33140",
-  "Photo": "assets/img/owner2.jpg",
+  "Photo": "owner2.jpg",
   "Birthday": "08/30/1985"
+},
+{
+  "_id": {
+    "$oid": "68e4830e233788ff96f66561"
+  },
+  "IdOwner": "owner1",
+  "Name": "Juan Perez",
+  "Address": "30 PALM AVE, Miami Beach, FL 33139",
+  "Photo": "owner1.jpg",
+  "Birthday": "02/23/1980"
 },
 {
   "_id": {
@@ -25,8 +25,18 @@
   "IdOwner": "owner3",
   "Name": "Charles Rivers",
   "Address": "190 PALM AVE, Miami Beach, FL 33139",
-  "Photo": "assets/img/owner3.jpg",
+  "Photo": "owner3.jpg",
   "Birthday": "01/07/1996"
+},
+{
+  "_id": {
+    "$oid": "68e594db037d5ab05225fc7d"
+  },
+  "IdOwner": "owner5",
+  "Name": "Eva East",
+  "Address": "6800 FISHER ISLAND DR 6802, Miami Beach, FL 33109",
+  "Photo": "owner5.jpg",
+  "Birthday": "22/02/1948"
 },
 {
   "_id": {
@@ -35,16 +45,6 @@
   "IdOwner": "owner4",
   "Name": "Christian Bodensiek",
   "Address": "198 PALM AVE, Miami Beach, FL 33139",
-  "Photo": "assets/img/owner4.jpg",
+  "Photo": "owner4.jpg",
   "Birthday": "12/04/1989"
-},
-{
-  "_id": {
-    "$oid": "68e594db037d5ab05225fc7d"
-  },
-  "IdOwner": "owner5",
-  "Name": "Adam East",
-  "Address": "6800 FISHER ISLAND DR 6802 #6802, Miami Beach, FL 33109",
-  "Photo": "assets/img/owner5.jpg",
-  "Birthday": "22/02/1948"
 }]

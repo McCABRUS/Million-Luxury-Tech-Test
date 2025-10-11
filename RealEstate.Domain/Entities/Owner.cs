@@ -20,6 +20,6 @@ namespace RealEstate.Domain.Entities
         public string? Photo { get; set; }
 
         [BsonElement("Birthday")]
-        public DateTime? Birthday { get; set; }
+        public string? Birthday { get; set; }
     }
 }

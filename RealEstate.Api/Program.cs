@@ -97,15 +97,8 @@ app.UseStaticFiles(new StaticFileOptions
     ServeUnknownFileTypes = imagesOptions.ServeUnknownFileTypes,
     OnPrepareResponse = ctx =>
     {
-        // Cache header
         if (!string.IsNullOrEmpty(imagesOptions.CacheControlHeader))
-        {
             ctx.Context.Response.Headers["Cache-Control"] = imagesOptions.CacheControlHeader;
-        }
-
-        // CORS header for images (allow frontend origin)
-        var allowOrigin = builder.Configuration["FRONTEND_URL"] ?? "*";
-        ctx.Context.Response.Headers["Access-Control-Allow-Origin"] = allowOrigin;
     }
 });
 

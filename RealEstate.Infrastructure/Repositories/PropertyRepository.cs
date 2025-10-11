@@ -52,5 +52,13 @@ namespace RealEstate.Infrastructure.Repositories
                 .ToListAsync(ct);
         }
 
+        public async Task<List<Owner>> GetOwnersByIdsAsync(string idOwner, CancellationToken ct = default)
+        {
+            return await _context.Owners
+                .Find(pt => pt.IdOwner == idOwner)
+                .ToListAsync(ct);
+        }
+
+
     }
 }
