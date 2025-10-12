@@ -52,8 +52,5 @@ namespace RealEstate.Api.Tests.TestDoubles
             var result = _owners.Where(o => o.IdOwner == idOwner).ToList();
             return Task.FromResult(result);
         }
-
-
-
     }
 }
