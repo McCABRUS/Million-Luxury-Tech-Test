@@ -44,6 +44,7 @@ From the repository root:
 
 1. **Build the API** (PowerShell):  
 ```powershell
+dotnet restore
 dotnet build
 ```
 
@@ -64,7 +65,12 @@ From the repository root change into the view folder or run from root depending 
 cd view
 ```
 
-2. **Start development server**:  
+2. Install dependences:  
+```bash
+npm install
+```
+
+3. **Start development server**:  
 ```bash
 npm run dev
 ```
