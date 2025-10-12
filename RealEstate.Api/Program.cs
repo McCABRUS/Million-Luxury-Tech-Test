@@ -102,7 +102,6 @@ app.UseStaticFiles(new StaticFileOptions
     }
 });
 
-// Middleware pipeline
 app.UseRouting();
 app.UseCors("FrontendCors");
 

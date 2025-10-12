@@ -24,7 +24,6 @@ namespace RealEstate.Api.Tests.Services
         [SetUp]
         public void Setup()
         {
-            // Asignar a los campos, no declarar variables locales
             _initial = new List<Property>
             {
                 new Property

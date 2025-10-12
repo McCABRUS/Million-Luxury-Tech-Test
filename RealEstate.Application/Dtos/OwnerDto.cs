@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-// RealEstate.Application/Dtos/OwnerDto.cs
 namespace RealEstate.Application.Dtos
 {
     public class OwnerDto
