@@ -1,4 +1,3 @@
-// src/pages/PropertyDetailPage.tsx
 import { useParams, useNavigate } from 'react-router-dom';
 import { PropertyGallery } from '../components/PropertyGallery';
 import { PropertyProfile } from '../components/PropertyProfile';
