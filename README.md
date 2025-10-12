@@ -80,7 +80,7 @@ From the repository root (PowerShell):
 dotnet test ./tests/RealEstate.Api.Tests/RealEstate.Api.Tests.csproj
 ```
 
-#### Frontend Tests Vitest
+#### Frontend Tests (Vitest)
 From the frontend folder:  
 ```bash
 cd view
