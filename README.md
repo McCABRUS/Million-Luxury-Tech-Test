@@ -4,15 +4,31 @@ A Fullstack Real Estate application with a .NET API, MongoDB database, and a Rea
 
 ### Prerequisites
 - **MongoDB** installed and available on the host.  
-- **.NET 8 or 9 SDK** installed.  
+- **.NET 9 SDK** installed.  
 - **Node.js and npm** installed.  
 - PowerShell available for running the provided commands.
 
 ---
 
+### Database
+- **Start MongoDB** using the system command line:  
+```bash
+mongod
+```
+**If mongod is not yet configured**
+```bash
+md C:\data\db
+"C:\Program Files\MongoDB\Server\{MongoDB_VERSION}\bin\mongod.exe" --dbpath "C:\data\db"
+```
+
+- **MongoDB URL**: http://localhost:27017
+
 ### Mongo Database Import
 
-1. Install mongoimport
+1. Install mongoimport dependences (MongoShell and Mongo Database Tools)
+
+https://www.mongodb.com/try/download/shell
+https://www.mongodb.com/try/download/database-tools
 
 2. Manual import with mongoimport:
 
@@ -23,15 +39,8 @@ mongoimport --uri="mongodb://localhost:27017/realestate" --collection=propertyIm
 mongoimport --uri="mongodb://localhost:27017/realestate" --collection=propertyTraces --file=db/fixtures/realestate.propertyTraces.json --jsonArray --drop
 ```
 
-3. Helper Script:
+- Helper Script:
 ./scripts/import-fixtures.sh
-
-### Database
-- **Start MongoDB** using the system command line:  
-```bash
-mongod
-```
-- **MongoDB URL**: http://localhost:27017
 
 #### Backup and Fixtures
 - **Backup folder**: ./backup — contains a JSON export of the four collections.  
@@ -54,6 +63,8 @@ dotnet run --project .\RealEstate.Api\RealEstate.Api.csproj
 ```
 
 - **Default API URL**: http://localhost:5093
+- **Properties list API URL**: GET http://localhost:5093/api/properties
+- **Property Details API URL**: GET http://localhost:5093/api/properties/{IdProperty}
 
 ---
 
@@ -87,7 +98,7 @@ dotnet test ./tests/RealEstate.Api.Tests/RealEstate.Api.Tests.csproj
 ```
 
 #### Frontend Tests (Vitest)
-From the frontend folder:  
+From the frontend folder (view):  
 ```bash
 cd view
 npm run test
