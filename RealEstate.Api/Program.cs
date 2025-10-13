@@ -104,9 +104,6 @@ app.UseStaticFiles(new StaticFileOptions
 
 app.UseRouting();
 app.UseCors("FrontendCors");
-
 app.UseAuthorization();
-
 app.MapControllers();
-
 app.Run();

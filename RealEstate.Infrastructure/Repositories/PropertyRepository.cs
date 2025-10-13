@@ -58,7 +58,5 @@ namespace RealEstate.Infrastructure.Repositories
                 .Find(pt => pt.IdOwner == idOwner)
                 .ToListAsync(ct);
         }
-
-
     }
 }

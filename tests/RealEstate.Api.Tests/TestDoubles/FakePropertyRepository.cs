@@ -11,8 +11,6 @@ namespace RealEstate.Api.Tests.TestDoubles
     {
         private readonly List<Property> _store;
         private readonly List<Owner> _owners;
-
-
         public FakePropertyRepository(IEnumerable<Property>? initial = null, List<Owner>? initialOwners = null)
         {
             _store = initial?.ToList() ?? new List<Property>();

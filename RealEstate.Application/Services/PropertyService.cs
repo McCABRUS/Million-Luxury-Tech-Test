@@ -12,7 +12,6 @@ namespace RealEstate.Application.Services
     {
         private readonly IPropertyRepository _repo;
         private readonly ImagesOptions _imagesOptions;
-
         public PropertyService(IPropertyRepository repo, ImagesOptions imagesOptions)
         {
             _repo = repo;

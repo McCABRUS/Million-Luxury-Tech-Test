@@ -12,6 +12,5 @@ namespace RealEstate.Application.Services
         Task<PropertyDto> CreateAsync(PropertyDto property);
         Task<bool> UpdateAsync(string id, PropertyDto property);
         Task<bool> DeleteAsync(string id);
-
     }
 }

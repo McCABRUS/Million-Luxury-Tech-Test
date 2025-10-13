@@ -20,7 +20,6 @@ namespace RealEstate.Api.Tests.Services
         private List<Property> _initial = null!;
         private ImagesOptions _imagesOptions = null!;
 
-
         [SetUp]
         public void Setup()
         {
@@ -58,7 +57,6 @@ namespace RealEstate.Api.Tests.Services
             _service = new PropertyService(_fakeRepo, _imagesOptions);
         }
 
-
         [Test]
         public async Task GetAsync_ShouldReturnMappedPropertyList()
         {
@@ -95,6 +93,5 @@ namespace RealEstate.Api.Tests.Services
             res.Owners[0].Photo.Should().Be(imgExpectedPath);
             res.Owners[0].Birthday.Should().Be("04/13/1982");
         }
-
     }
 }
