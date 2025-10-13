@@ -11,12 +11,9 @@ export default function PropertyListPage() {
       <header className="app-header">
         <h1>Properties</h1>
       </header>
-
       <Filters {...params} onChange={handleChange} />
-
       {loading && <p>Loading...</p>}
       {error && <p className="empty">{error}</p>}
-
       <section className="grid">
         {data.length === 0 ? <div className="empty">No properties found</div> : data.map(p => <PropertyCard key={p.idProperty} prop={p} />)}
       </section>

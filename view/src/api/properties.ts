@@ -48,10 +48,7 @@ export type OwnerDto = {
 export type PropertyGalleryProps = { images: string[]; initialIndex?: number };
 export type PropertyProfileProps = { property: PropertyDetailDto };
 export type OwnerProfileProps = { owners: OwnerDto[] };
-
-
 export const fetchProperties = (params: PropertyListParams) =>
   http.get<PropertyListDto[]>('', { params }).then(r => r.data);
-
 export const fetchPropertyById = (id: string) =>
   http.get<PropertyDetailDto>(`/${encodeURIComponent(id)}`).then(r => r.data);

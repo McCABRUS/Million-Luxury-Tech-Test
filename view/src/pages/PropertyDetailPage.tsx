@@ -9,7 +9,6 @@ export default function PropertyDetailPage({ id: propId }: { id?: string }) {
   const params = useParams<{ id?: string }>();
   const navigate = useNavigate();
   const id = propId ?? params.id;
-
   const { data: property, loading, error } = useProperty(id);
 
   if (!id) return <div className="pd-page--center">Property id is missing</div>;
@@ -28,7 +27,6 @@ export default function PropertyDetailPage({ id: propId }: { id?: string }) {
         >
           ← Back
         </button>
-
         <div className="pd-title-block">
           <h1 className="pd-title-lg">{property.name ?? 'Property'}</h1>
           <div className="pd-price-lg">
@@ -40,11 +38,9 @@ export default function PropertyDetailPage({ id: propId }: { id?: string }) {
           </div>
         </div>
       </div>
-
       <div className="pd-gallery-full">
         <PropertyGallery images={property.images ?? []} />
       </div>
-
       <div className="pd-content">
         <section className="pd-right">
           <PropertyProfile property={property} />

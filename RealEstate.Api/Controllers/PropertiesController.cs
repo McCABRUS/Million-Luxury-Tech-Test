@@ -26,6 +26,5 @@ namespace RealEstate.Api.Controllers
             if (dto == null) return NotFound();
             return Ok(dto);
         }
-
     }
 }
